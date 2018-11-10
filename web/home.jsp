@@ -4,6 +4,7 @@
     Author     : Carlos
 --%>
 <%@page import="br.com.fatecpg.quiz.Db"%>
+<%@page import="br.com.fatecpg.quiz.Teste"%>
 <%@page import="br.com.fatecpg.quiz.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,6 +25,8 @@
                     usuario = (String) session.getAttribute("USUARIO");
                 }
             }
+            
+            
         %>
     </head>
     <body>
@@ -34,11 +37,57 @@
             <form>
                 <label for="usuario">Usuario</label>
                 <input name="usuario" type="text" placeholder="Informe o usuario para login" />
-
                 <button type="submit" name="login" value="login">Logar</button>
             </form>
         </div>
         Bem Vindo <%= usuario %>. <br/> Ao WebQuiz!
-        <h3><a href="test.jsp"><button>Realizar Teste!</button></a></h3>
+        
+        <% if((String)session.getAttribute("USUARIO") != null){ %>
+            <h3><a href="test.jsp"><button>Realizar Teste!</button></a></h3>
+            <h3><a href="sair.jsp"><button>sair</button></a></h3>
+        <% } %>
+        
+        <table>
+            <thead>
+                <tr>
+                    <td colspan="2">Ranking dos 10 melhores testes</td>
+                </tr>
+                <tr>
+                    <td>Usuario</td>
+                    <td>Nota</td>
+                </tr>
+            </thead>
+            <tbody>
+                <%  int cont = (Db.notasMax().size() >= 10) ? 10 : Db.notasMax().size();  
+                    for(int i = 0; i < cont; i++){%>
+                    <%for(Teste tst: Db.notasMax()){ %>
+                        <tr>
+                            <td><%= tst.getUsuario() %></td>
+                            <td><%= tst.getNota() %></td>
+                        </tr>
+                    <% } %>
+                <% } %>
+            </tbody>
+        </table>
+        <hr/>
+        <table>
+            <thead>
+                <tr>
+                    <td colspan="2">Lista de testes efetuados</td>
+                </tr>
+                <tr>
+                    <td>Usuario</td>
+                    <td>Nota</td>
+                </tr>
+            </thead>
+            <tbody>
+                <%for(Teste tst: Db.teste()){ %>
+                    <tr>
+                        <td><%= tst.getUsuario() %></td>
+                        <td><%= tst.getNota() %></td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
     </body>
 </html>

@@ -18,9 +18,10 @@
         
         <% 
             String usuario;
+            int soma = 0;
+            double average = 100.0 * ((double) soma / 10);
             usuario = (String) session.getAttribute("USUARIO");
             if(request.getParameter("send") != null) {
-                int soma = 0;
                 for(Question q: Db.getMathTest()){
                     String userResp = request.getParameter(q.getTitle());
                     if(request.getParameter(q.getTitle()) != null){
@@ -29,8 +30,7 @@
                         } 
                     }
                 }
-                
-                double average = ((double) soma / 10);
+                average = 100.0 * ((double) soma / 10);
                 
                 Teste teste = new Teste(usuario, average);
                 Db.teste().add(teste);
@@ -39,7 +39,7 @@
         %>
     </head>
     <body>
-        <h1>Quiz</h1>
+        <h1>Quiz: <%=average%></h1>
         <hr/>
         <form>
             <% for(int c = 0; c < 10; c++){

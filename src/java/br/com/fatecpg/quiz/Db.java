@@ -6,6 +6,7 @@
 package br.com.fatecpg.quiz;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -53,6 +54,24 @@ public class Db {
   public static ArrayList<Teste> teste(){
     if( listaTeste == null){
         listaTeste = new ArrayList<>();
+    }
+    return listaTeste;
+  }
+  
+  public static ArrayList<Teste> notasMax(){
+    if( listaTeste == null){
+        listaTeste = new ArrayList<>();
+    }else{
+        double aux;
+        for(int i = 0; i<listaTeste.size(); i++){
+          for(int j = 0; j<listaTeste.size()-1; j++){
+              if(listaTeste.get(j).getNota() > listaTeste.get(j + 1).getNota()){
+                  aux = listaTeste.get(j).getNota();
+                  listaTeste.get(j).setNota(listaTeste.get(j + 1).getNota());
+                  listaTeste.get(j + 1).setNota(aux);
+              }
+          }
+        }
     }
     return listaTeste;
   }
