@@ -34,6 +34,7 @@
                 
                 Teste teste = new Teste(usuario, average);
                 Db.teste().add(teste);
+                response.sendRedirect("home.jsp");
             }
         %>
     </head>

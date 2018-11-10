@@ -12,15 +12,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home - WebQuiz</title>
         <% 
-            String usuario;
+            String usuario = ((String)session.getAttribute("USUARIO")==null) ? "" : (String)session.getAttribute("USUARIO");
             if(request.getParameter("login") != null) {
                 session.setAttribute("USUARIO", request.getParameter("usuario"));
                 usuario = (String) session.getAttribute("USUARIO");
                 Usuario usr = new Usuario(request.getParameter("usuario"));
                 Db.usuario().add(usr);
             }else{
-                session.setAttribute("USUARIO", "");
-                usuario = (String) session.getAttribute("USUARIO");
+                if(session.getAttribute("USUARIO") == null){
+                    session.setAttribute("USUARIO", "");
+                    usuario = (String) session.getAttribute("USUARIO");
+                }
             }
         %>
     </head>
