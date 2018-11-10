@@ -11,9 +11,15 @@ import java.util.ArrayList;
  *
  * @author Carlos
  */
-public class DB {
+public class Db {
+  private static ArrayList<Usuario> listaUsuario;
+  private static ArrayList<Teste> listaTeste;
+  private static ArrayList<Integer> listaNum;
+  
   public static ArrayList<Question> getMathTest(){
+        
         ArrayList<Question> test = new ArrayList<>();
+        
         test.add(new Question("Qual o nome da primeira capital que o Brasil teve, de 1549 até 1763 ?","Salvador", new String[]{"Rio de Janeiro","São Vicente","Salvador","São Paulo","Recife"}));
         test.add(new Question("Qual a capital de Sergipe ?","Aracaju", new String[]{"Aracaju","Natal","Maceió","Palmares","Uruguaína"}));
         test.add(new Question("Qual a capital do Acre ?","Rio Branco", new String[]{"Cruzeiro do Sul","Rio Branco","Rio Acre","Tabatinga","Benjamin Constant"}));
@@ -36,4 +42,28 @@ public class DB {
         test.add(new Question("Qual a capital do Rio Grande do Sul ?","Porto Alegre", new String[]{"Pouso Alegre","Porto Velho","Rio Grande","Pelotas","Porto Alegre"}));
         return test;
     }
+  
+  public static ArrayList<Usuario> usuario(){
+        if( listaUsuario == null){
+            listaUsuario = new ArrayList<>();
+        }
+        return listaUsuario;
+  }
+  
+  public static ArrayList<Teste> teste(){
+    if( listaTeste == null){
+        listaTeste = new ArrayList<>();
+    }
+    return listaTeste;
+  }
+  
+  public static ArrayList<Integer> listaNum(){
+    if( listaNum == null){
+        listaNum = new ArrayList<>();
+    }
+    return listaNum;
+  }
+  public static void listaNumClear(){
+    listaNum.clear();
+  }
 }
